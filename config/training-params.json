@@ -6,8 +6,8 @@
     "val_annotations": "validation.json",
     "output_dir": "models/",
     "config_files": [
-    	"model_configs/model1.yaml", 
-    	"model_configs/model2.yaml"
+    	"config/model_configs/model1.yaml", 
+    	"config/model_configs/model2.yaml"
     ],
     "metrics_dir": "results/metrics"
 }
