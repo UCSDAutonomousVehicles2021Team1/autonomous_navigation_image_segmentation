@@ -6,6 +6,7 @@ sys.path.insert(0, 'src')
 from etl import move_data
 # from eda import main_eda
 # from utils import convert_notebook
+from train import train_models
 # from tuning import find_metrics
 # from generate import create_launch_files
 
@@ -15,6 +16,7 @@ def main(targets):
 
     # data_config = json.load(open('config/data-params.json'))
     # eda_config = json.load(open('config/eda-params.json'))
+    training_config = json.loads(open('config/training-params.json'))
     # tuning_config = json.load(open('config/tuning-params.json'))
     # generate_config = json.load(open('config/generate-params.json'))
     test_config = json.load(open('config/test-params.json'))
@@ -38,6 +40,7 @@ def main(targets):
         move_data(**test_config)
 #         main_eda(**eda_config)
 #         convert_notebook(**eda_config)
+        train_models(**training_config)
 #         find_metrics(**tuning_config)
 #         create_launch_files(**generate_config)
         

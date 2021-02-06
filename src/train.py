@@ -36,7 +36,7 @@ class COCOFormatTrainer(DefaultTrainer):
         	output_dir = output_folder)
 
 
-def train_model(imagedir_name, train_path, train_annotations, val_path, \
+def train_models(imagedir_name, train_path, train_annotations, val_path, \
 	val_annotations, output_dir, config_files, metrics_dir):
 	#Generate require metadata and load dataset into dictionary
 	train_dataset_metadata, train_dataset_dicts, val_dataset_metadata, \
