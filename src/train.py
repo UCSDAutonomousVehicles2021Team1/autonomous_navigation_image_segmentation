@@ -84,7 +84,7 @@ def setup_config(config, output_dir):
     cfg.OUTPUT_DIR = output_dir
     os.makedirs(cfg.OUTPUT_DIR, exist_ok = True)
     #Set config device
-    if torch.cuda_is_available():
+    if torch.cuda.is_available():
         print("Using CUDA")
         cfg.MODEL.DEVICE = 'cuda'
     else:
