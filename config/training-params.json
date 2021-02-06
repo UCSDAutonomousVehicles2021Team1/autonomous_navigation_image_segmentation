@@ -1,0 +1,4 @@
+{
+    "train_image_dir": "data/train/testdata/",
+    "storedir": "data/",
+}
