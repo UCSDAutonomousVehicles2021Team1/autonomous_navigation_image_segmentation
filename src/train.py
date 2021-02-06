@@ -97,10 +97,10 @@ def cleaned_metrics(output_dir, metrics_dir, model_name):
             #Read the lines
             metrics_file = metric.readlines()
         #Clean the metric file
-        cleaned_metrics = [{metric.split(": ")[0]: \
-            float(metric.split(": ")[1]) for metric in metrics} for metrics \ 
-            in [all_metrics.strip("\n").replace("{", "").replace("}", \
-            "").replace("\"","").split(", ") for all_metrics in metrics_file]]
+        cleaned_metrics = [{metric.split(": ")[0]: float(metric.split(": " \
+            )[1]) for metric in metrics} for metrics in \
+            [all_metrics.strip("\n").replace("{", "").replace("}","" \
+            ).replace("\"","").split(", ") for all_metrics in metrics_file]]
         #Make a new directory to store it
         os.makedirs(metrics_dir, exist_ok = True)
         #Dump into dictionary
