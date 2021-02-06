@@ -94,13 +94,13 @@ def setup_config(config, output_dir):
 def cleaned_metrics(output_dir, metrics_dir, model_name):
     #Open the unclean metrics file
     with open(os.path.join(output_dir, 'metrics.json'), 'r') as metric:
-            #Read the lines
-            metrics_file = metric.readlines()
+        #Read the lines
+        metrics_file = metric.readlines()
         #Clean the metric file
-        cleaned_metrics = [{metric.split(": ")[0]: float(metric.split(": " \
-            )[1]) for metric in metrics} for metrics in \
+        cleaned_metrics = [{metric.split(": ")[0]:float(metric.split(": ")[1] \
+            ) for metric in metrics} for metrics in \
             [all_metrics.strip("\n").replace("{", "").replace("}","" \
-            ).replace("\"","").split(", ") for all_metrics in metrics_file]]
+            ).replace("\"", "").split(", ") for all_metrics in metrics_file]]
         #Make a new directory to store it
         os.makedirs(metrics_dir, exist_ok = True)
         #Dump into dictionary
