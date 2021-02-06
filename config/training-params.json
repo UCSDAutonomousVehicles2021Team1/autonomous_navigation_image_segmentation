@@ -1,4 +1,12 @@
 {
-    "train_image_dir": "data/train/testdata/",
-    "storedir": "data/",
+    "train_path": "data/train/",
+    "train_annotations": "train.json",
+    "val_path": "data/validation/",
+    "val_annotations": "validation.json",
+    "output_dir": "models/",
+    "config_files": [
+    	"model_configs/model1.yaml", 
+    	"model_configs/model2.yaml"
+    ],
+    "metrics_dir": "results/metrics"
 }
