@@ -57,7 +57,8 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
         cleaned_metrics(output_dir, metrics_dir, model_name)
 
 
-def setup_data(train_path, train_annotations, val_path, val_annotations):
+def setup_data(imagedir_name, train_path, train_annotations, val_path, \
+    val_annotations):
     #Register the train and validation datasets into a dictionary
     register_coco_instances("train_detector", {}, os.path.join(train_path, \
         train_annotations), os.path.join(train_path, imagedir_name))

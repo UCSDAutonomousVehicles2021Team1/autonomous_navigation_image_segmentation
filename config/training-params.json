@@ -1,4 +1,5 @@
 {
+	"imagedir_name": "images/",
     "train_path": "data/train/",
     "train_annotations": "train.json",
     "val_path": "data/validation/",

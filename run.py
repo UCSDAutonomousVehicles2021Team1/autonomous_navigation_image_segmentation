@@ -16,7 +16,7 @@ def main(targets):
 
     # data_config = json.load(open('config/data-params.json'))
     # eda_config = json.load(open('config/eda-params.json'))
-    training_config = json.loads(open('config/training-params.json'))
+    training_config = json.load(open('config/training-params.json'))
     # tuning_config = json.load(open('config/tuning-params.json'))
     # generate_config = json.load(open('config/generate-params.json'))
     test_config = json.load(open('config/test-params.json'))
