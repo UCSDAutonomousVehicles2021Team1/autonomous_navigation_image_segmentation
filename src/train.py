@@ -17,7 +17,7 @@ from detectron2.engine import DefaultTrainer, DefaultPredictor
 from detectron2.config import get_cfg
 from detectron2.utils.visualizer import Visualizer
 from detectron2.data import MetadataCatalog, DatasetCatalog, \
-build_detection_test_loader
+	build_detection_test_loader
 from detectron2.data.datasets import register_coco_instances
 from detectron2.config import get_cfg
 from detectron2.utils.visualizer import ColorMode
@@ -70,7 +70,7 @@ def setup_data(train_path, train_annotations, val_path, val_annotations):
 	val_dataset_dicts = DatasetCatalog.get("val_detector")
 
 	return train_dataset_metadata, train_dataset_dicts, val_dataset_metadata, \
-	val_dataset_dicts
+		val_dataset_dicts
 
 def setup_config(config, output_dir):
 	cfg = get_cfg()
@@ -98,8 +98,8 @@ def cleaned_metrics(output_dir, metrics_dir, model_name):
 		    metrics_file = metric.readlines()
 		#Clean the metric file
 		cleaned_metrics = [{metric.split(": ")[0]:\
-		float(metric.split(": ")[1]) for metric in metrics} for metrics in \
-		[all_metrics.strip("\n").replace("{", "").replace("}", \
+			float(metric.split(": ")[1]) for metric in metrics} for metrics \ 
+			in [all_metrics.strip("\n").replace("{", "").replace("}", \
 			"").replace("\"","").split(", ") for all_metrics in metrics_file]]
 		#Make a new directory to store it
 		os.makedirs(metrics_dir, exist_ok = True)
