@@ -40,8 +40,8 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
     val_annotations, output_dir, config_files, metrics_dir):
     #Generate require metadata and load dataset into dictionary
     train_dataset_metadata, train_dataset_dicts, val_dataset_metadata, \
-    val_dataset_dicts = setup_data(train_path, train_annotations, val_path, \
-        val_annotations, config_files)
+    val_dataset_dicts = setup_data(imagedir_name, train_path, \
+        train_annotations, val_path, val_annotations)
     #Iterate through the model configs
     for config in config_files:
         #Store model name
