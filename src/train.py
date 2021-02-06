@@ -48,7 +48,7 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
         model_name = config.split("/")[-1][:-YAML_EXTENSION_SIZE]
         #Setup the model config with the dataset names and device to train on
         #and output dir
-        cfg = setup_config(conig, output_dir)
+        cfg = setup_config(config, output_dir)
         #Create trainer and start training
         trainer = COCOFormatTrainer(cfg)
         trainer.resume_or_load(resume=False)
