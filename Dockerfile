@@ -42,5 +42,5 @@ USER $NB_UID:$NB_GID
 ENV PATH=${PATH}:/usr/local/nvidia/bin
 
 RUN pip install 'git+https://github.com/facebookresearch/fvcore'
-RUN git clone https://github.com/facebookresearch/detectron2 detectron2_repo
+RUN git clone https://github.com/sisaha9/detectron2 detectron2_repo
 RUN pip install -e detectron2_repo
