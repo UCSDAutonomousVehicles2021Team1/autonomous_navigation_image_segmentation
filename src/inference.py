@@ -4,6 +4,7 @@ import subprocess
 import torch
 import json
 import numpy as np
+import ffmpeg
 
 # import some common detectron2 utilities
 from detectron2.engine import DefaultPredictor
@@ -17,22 +18,12 @@ from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
 from custom_trainer import COCOFormatTrainer
 
-from contextlib import contextmanager,redirect_stderr,redirect_stdout
-
-@contextmanager
-def suppress_stdout_stderr():
-    """A context manager that redirects stdout and stderr to devnull"""
-    with open(os.devnull, 'w') as fnull:
-        with redirect_stderr(fnull) as err, redirect_stdout(fnull) as out:
-            yield (err, out)
-
 def best_inference(best_model_name, config_dir, model_dir, test_path_images, \
     test_annotations, confidence_threshold, result_metrics_dir, \
     video_img_dir, video, framerate):
     #Storing test data
-    with suppress_stdout_stderr():
-        test_dataset_metadata, test_dataset_dicts = setup_data(\
-            test_path_images, test_annotations)
+    test_dataset_metadata, test_dataset_dicts = setup_data(test_path_images, \
+        test_annotations)
     #Creating config file
     cfg = setup_config(config_dir, model_dir, best_model_name, \
         confidence_threshold)
@@ -46,9 +37,7 @@ def best_inference(best_model_name, config_dir, model_dir, test_path_images, \
     #Loading in train
     trainer = COCOFormatTrainer(cfg)
     #Getting inference results on trainer
-    with suppress_stdout_stderr():
-        test_results = inference_on_dataset(trainer.model, \
-            test_loader, evaluator)
+    test_results = inference_on_dataset(trainer.model, test_loader, evaluator)
     #Dumping into json file
     with open(os.path.join(result_metrics_dir, 'test_results.json'), 'w') as \
         outfile:
@@ -93,6 +82,7 @@ def setup_config(config_dir, model_dir, model_name, confidence_threshold):
 
 def create_video(video_img_dir, video, test_loader, \
     test_dataset_metadata, test_dataset_dicts, predictor, framerate):
+    os.makedirs(video_img_dir, exist_ok = True)
     #Iterating through images in dictionary
     for i, d in enumerate(test_dataset_dicts):    
         im = cv2.imread(d["file_name"])
@@ -114,3 +104,5 @@ def create_video(video_img_dir, video, test_loader, \
     subprocess.call(["ffmpeg", "-framerate {}".format(framerate), \
         "-pattern_type glob", "-i '{}*.jpg'".format(video_img_dir), \
         "-c:v libx264", "-r 30", "-pix_fmt yuv420p", "-y", video])
+    ffmpeg.input('{}*.jpg'.format(video_img_dir), pattern_type='glob', \
+        framerate=framerate).output(video).run()
