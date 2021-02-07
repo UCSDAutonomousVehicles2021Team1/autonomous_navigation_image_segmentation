@@ -111,4 +111,5 @@ def cleaned_metrics(output_dir, metrics_dir, model_name):
             "_train_results.json"), "w") as output_file:
             json.dump(cleaned_metrics, output_file)
         #Remove uncleaned metrics so that we can generate anew
-        subprocess.call(["rm", "-r", "-f", os.path.join(output_dir)])
+        subprocess.call(["rm", "-r", "-f", os.path.join(output_dir, \
+            'metrics.json')])
