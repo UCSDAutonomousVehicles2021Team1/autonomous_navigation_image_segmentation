@@ -21,14 +21,17 @@ from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 #Import custom evaluator
 from custom_trainer import COCOFormatTrainer
 
+from out_suppresor import suppress_stdout_stderr
+
 YAML_EXTENSION_SIZE = 5
 
 def train_models(imagedir_name, train_path, train_annotations, val_path, \
     val_annotations, output_dir, config_files, metrics_dir):
     #Generate require metadata and load dataset into dictionary
-    train_dataset_metadata, train_dataset_dicts, val_dataset_metadata, \
-    val_dataset_dicts = setup_data(imagedir_name, train_path, \
-        train_annotations, val_path, val_annotations)
+    with suppress_stdout_stderr():
+        train_dataset_metadata, train_dataset_dicts, val_dataset_metadata, \
+        val_dataset_dicts = setup_data(imagedir_name, train_path, \
+            train_annotations, val_path, val_annotations)
     #Iterate through the model configs and store model names and metrics
     model_names = []
     for config in config_files:
@@ -40,10 +43,11 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
         #Create trainer and start training
         trainer = COCOFormatTrainer(cfg)
         trainer.resume_or_load(resume=False)
-        trainer.train()
+        with suppress_stdout_stderr():
+            trainer.train()
         #Clean the metrics and dump into another file
         cleaned_metrics(cfg.OUTPUT_DIR, metrics_dir, model_name)
-        model_names.append(model_names)
+        model_names.append(model_name)
     #Returning model names to use when evaluating
     return model_names
 

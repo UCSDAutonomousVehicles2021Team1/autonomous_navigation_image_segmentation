@@ -1,5 +1,6 @@
 import numpy as np
 import json
+import os
 
 def find_best_model(model_names, metrics_dir, priority_order):
 	#Create dictionary to store metrics in priority order for each model
