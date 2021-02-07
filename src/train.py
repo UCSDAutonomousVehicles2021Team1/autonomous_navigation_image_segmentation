@@ -42,6 +42,7 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
     train_dataset_metadata, train_dataset_dicts, val_dataset_metadata, \
     val_dataset_dicts = setup_data(imagedir_name, train_path, \
         train_annotations, val_path, val_annotations)
+    trainers = []
     #Iterate through the model configs
     for config in config_files:
         #Store model name
@@ -55,6 +56,8 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
         trainer.train()
         #Clean the metrics and dump into another file
         cleaned_metrics(output_dir, metrics_dir, model_name)
+        trainers.append(trainer)
+    return trainers
 
 
 def setup_data(imagedir_name, train_path, train_annotations, val_path, \

@@ -40,7 +40,8 @@ def main(targets):
         move_data(**test_config)
 #         main_eda(**eda_config)
 #         convert_notebook(**eda_config)
-        train_models(**training_config)
+        trainers = train_models(**training_config)
+        display(trainers)
 #         find_metrics(**tuning_config)
 #         create_launch_files(**generate_config)
         
