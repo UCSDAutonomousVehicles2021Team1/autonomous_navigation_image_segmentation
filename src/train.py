@@ -21,7 +21,7 @@ from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 #Import custom evaluator
 from custom_trainer import COCOFormatTrainer
 
-from out_suppresor import suppress_stdout_stderr
+from out_suppressor import suppress_stdout_stderr
 
 YAML_EXTENSION_SIZE = 5
 

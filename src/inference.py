@@ -17,7 +17,7 @@ from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
 from custom_trainer import COCOFormatTrainer
 
-from out_suppresor import suppress_stdout_stderr
+from out_suppressor import suppress_stdout_stderr
 
 def best_inference(best_model_name, config_dir, model_dir, test_path_images, \
     test_annotations, confidence_threshold, result_metrics_dir, \
