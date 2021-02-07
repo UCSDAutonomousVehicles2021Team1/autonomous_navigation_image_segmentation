@@ -11,7 +11,7 @@ RUN apt-get update --fix-missing && \
                        vim \
                        wget \
                        unzip \
-		       ffmpeg
+                       ffmpeg
 
 RUN conda install cudatoolkit=10.1 \
 				  cudnn \
@@ -28,8 +28,9 @@ RUN pip install --no-cache-dir numpy \
                                notebook \
                                matplotlib \
                                seaborn \
-			        tensorboard cmake \
-			        opencv-python
+                               tensorboard cmake \
+                               opencv-python \
+                               ffmpeg-python
 			       
 RUN pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 
