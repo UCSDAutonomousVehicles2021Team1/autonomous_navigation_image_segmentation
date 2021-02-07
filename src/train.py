@@ -21,7 +21,14 @@ from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 #Import custom evaluator
 from custom_trainer import COCOFormatTrainer
 
-from out_suppressor import suppress_stdout_stderr
+from contextlib import contextmanager,redirect_stderr,redirect_stdout
+
+@contextmanager
+def suppress_stdout_stderr():
+    """A context manager that redirects stdout and stderr to devnull"""
+    with open(os.devnull, 'w') as fnull:
+        with redirect_stderr(fnull) as err, redirect_stdout(fnull) as out:
+            yield (err, out)
 
 YAML_EXTENSION_SIZE = 5
 

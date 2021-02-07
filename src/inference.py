@@ -17,7 +17,14 @@ from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
 from custom_trainer import COCOFormatTrainer
 
-from out_suppressor import suppress_stdout_stderr
+from contextlib import contextmanager,redirect_stderr,redirect_stdout
+
+@contextmanager
+def suppress_stdout_stderr():
+    """A context manager that redirects stdout and stderr to devnull"""
+    with open(os.devnull, 'w') as fnull:
+        with redirect_stderr(fnull) as err, redirect_stdout(fnull) as out:
+            yield (err, out)
 
 def best_inference(best_model_name, config_dir, model_dir, test_path_images, \
     test_annotations, confidence_threshold, result_metrics_dir, \
