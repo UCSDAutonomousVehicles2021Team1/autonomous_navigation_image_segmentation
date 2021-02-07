@@ -1,4 +1,5 @@
 {
 	"metrics_dir": "results/metrics/",
-	"priority_order": ["segm/AP", "segm/AP-cone", "segm/AP-lane", "segm/AP50", "segm/AP75", "segm/APl", "segm/APm", "segm/APs"]
+	"priority_order": ["segm/AP", "segm/AP-cone", "segm/AP-lane", "segm/AP50", "segm/AP75", "segm/APl", "segm/APm", "segm/APs"],
+	"best_model_file": "results/best_model.txt"
 }
