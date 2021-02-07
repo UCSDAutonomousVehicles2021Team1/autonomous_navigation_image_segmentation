@@ -113,3 +113,5 @@ def cleaned_metrics(output_dir, metrics_dir, model_name):
         #Remove uncleaned metrics so that we can generate anew
         subprocess.call(["rm", "-r", "-f", os.path.join(output_dir, \
             'metrics.json')])
+        subprocess.call(["rm", "-r", "-f", os.path.join(output_dir, \
+            'inference/')])
