@@ -9,11 +9,10 @@ import ffmpeg
 # import some common detectron2 utilities
 from detectron2.engine import DefaultPredictor
 from detectron2.config import get_cfg
-from detectron2.utils.visualizer import Visualizer
+from detectron2.utils.visualizer import Visualizer, ColorMode
 from detectron2.data import MetadataCatalog, DatasetCatalog, \
     build_detection_test_loader
 from detectron2.data.datasets import register_coco_instances
-from detectron2.utils.visualizer import ColorMode
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
 from custom_trainer import COCOFormatTrainer
@@ -101,8 +100,5 @@ def create_video(video_img_dir, video, test_loader, \
             v.get_image()[:, :, ::-1].astype(np.float))
     #Generate video via ffmpeg
     os.makedirs("/".join(video.split("/")[:-1]), exist_ok = True)
-    subprocess.call(["ffmpeg", "-framerate {}".format(framerate), \
-        "-pattern_type glob", "-i '{}*.jpg'".format(video_img_dir), \
-        "-c:v libx264", "-r 30", "-pix_fmt yuv420p", "-y", video])
     ffmpeg.input('{}*.jpg'.format(video_img_dir), pattern_type='glob', \
         framerate=framerate).output(video).run()
