@@ -43,7 +43,7 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
         trainer.train()
         #Clean the metrics and dump into another file
         cleaned_metrics(cfg.OUTPUT_DIR, metrics_dir, model_name)
-        model_name.append(model_names)
+        model_names.append(model_names)
     #Returning model names to use when evaluating
     return model_names
 
