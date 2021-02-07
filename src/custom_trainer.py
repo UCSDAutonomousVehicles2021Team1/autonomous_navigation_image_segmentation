@@ -1,5 +1,6 @@
 from detectron2.engine import DefaultTrainer
 from detectron2.evaluation import COCOEvaluator
+import os
 
 #Custom Trainer to implement COCO Evaluator
 class COCOFormatTrainer(DefaultTrainer):

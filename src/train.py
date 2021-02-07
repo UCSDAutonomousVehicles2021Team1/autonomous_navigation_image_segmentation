@@ -19,7 +19,7 @@ from detectron2.utils.visualizer import ColorMode
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
 #Import custom evaluator
-from trainer import COCOFormatTrainer
+from custom_trainer import COCOFormatTrainer
 
 YAML_EXTENSION_SIZE = 5
 

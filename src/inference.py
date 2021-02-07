@@ -12,7 +12,7 @@ from detectron2.data.datasets import register_coco_instances
 from detectron2.utils.visualizer import ColorMode
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
-from trainer import COCOFormatTrainer
+from custom_trainer import COCOFormatTrainer
 
 def best_inference(best_model_name, config_dir, model_dir, test_path_images, \
 	test_annotations, confidence_threshold, result_metrics_dir, video_img_dir \
