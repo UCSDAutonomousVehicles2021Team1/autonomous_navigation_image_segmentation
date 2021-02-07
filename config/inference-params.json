@@ -1,0 +1,11 @@
+{
+	"config_dir": "config/model_configs/",
+	"model_dir": "models/",
+	"test_path_images": "data/test/images/",
+    "test_annotations": "test.json",
+    "confidence_threshold": 0.0,
+    "result_metrics_dir": "results/metrics/",
+    "video_img_dir": "results/images/",
+    "video": "results/video/predictions.mp4",
+    "framerate": 1
+}

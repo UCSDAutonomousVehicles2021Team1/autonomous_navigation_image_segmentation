@@ -1,7 +1,5 @@
 import os
 import subprocess
-import glob
-import numpy as np
 
 def move_data(rawdir, storedir, imagedir_name):
     """

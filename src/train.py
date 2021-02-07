@@ -3,13 +3,9 @@ from detectron2.utils.logger import setup_logger
 setup_logger()
 
 # import some common libraries
-import matplotlib.pyplot as plt
-import numpy as np
-import cv2
 import os
 import torch
 import subprocess
-import re
 import json
 
 # import some common detectron2 utilities
@@ -19,22 +15,13 @@ from detectron2.utils.visualizer import Visualizer
 from detectron2.data import MetadataCatalog, DatasetCatalog, \
     build_detection_test_loader
 from detectron2.data.datasets import register_coco_instances
-from detectron2.config import get_cfg
 from detectron2.utils.visualizer import ColorMode
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
+#Import custom evaluator
+from trainer import COCOFormatTrainer
 
 YAML_EXTENSION_SIZE = 5
-
-#Custom Trainer to implement COCO Evaluator
-class COCOFormatTrainer(DefaultTrainer):
-    @classmethod
-    def build_evaluator(cls, cfg, dataset_name, output_folder=None):
-        if output_folder is None:
-            output_folder = os.path.join(cfg.OUTPUT_DIR,"inference")
-        return COCOEvaluator(dataset_name, distributed = False, \
-            output_dir = output_folder)
-
 
 def train_models(imagedir_name, train_path, train_annotations, val_path, \
     val_annotations, output_dir, config_files, metrics_dir):
@@ -42,7 +29,8 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
     train_dataset_metadata, train_dataset_dicts, val_dataset_metadata, \
     val_dataset_dicts = setup_data(imagedir_name, train_path, \
         train_annotations, val_path, val_annotations)
-    #Iterate through the model configs
+    #Iterate through the model configs and store model names and metrics
+    model_names = []
     for config in config_files:
         #Store model name
         model_name = config.split("/")[-1][:-YAML_EXTENSION_SIZE]
@@ -55,7 +43,9 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
         trainer.train()
         #Clean the metrics and dump into another file
         cleaned_metrics(cfg.OUTPUT_DIR, metrics_dir, model_name)
-
+        model_name.append(model_names)
+    #Returning model names to use when evaluating
+    return model_names
 
 def setup_data(imagedir_name, train_path, train_annotations, val_path, \
     val_annotations):
@@ -64,7 +54,7 @@ def setup_data(imagedir_name, train_path, train_annotations, val_path, \
         train_annotations), os.path.join(train_path, imagedir_name))
     register_coco_instances("val_detector", {}, os.path.join(val_path, \
         val_annotations), os.path.join(val_path, imagedir_name))
-    #Store train and validation metadata and dictionareies
+    #Store train and validation metadata and dictionaries
     train_dataset_metadata = MetadataCatalog.get("train_detector")
     train_dataset_dicts = DatasetCatalog.get("train_detector")
     val_dataset_metadata = MetadataCatalog.get("val_detector")
