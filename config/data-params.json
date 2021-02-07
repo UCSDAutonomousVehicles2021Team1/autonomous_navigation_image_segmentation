@@ -1,0 +1,5 @@
+{
+    "rawdir": "test/testdata/",
+    "storedir": "data/",
+    "imagedir_name": "images/"
+}
