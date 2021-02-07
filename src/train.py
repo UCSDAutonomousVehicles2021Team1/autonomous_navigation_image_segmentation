@@ -49,7 +49,7 @@ def train_models(imagedir_name, train_path, train_annotations, val_path, \
         model_name = config.split("/")[-1][:-YAML_EXTENSION_SIZE]
         #Setup the model config with the dataset names and device to train on
         #and output dir
-        cfg = setup_config(config, output_dir)
+        cfg = setup_config(config, output_dir, model_name)
         #Create trainer and start training
         trainer = COCOFormatTrainer(cfg)
         trainer.resume_or_load(resume=False)
@@ -76,7 +76,7 @@ def setup_data(imagedir_name, train_path, train_annotations, val_path, \
     return train_dataset_metadata, train_dataset_dicts, val_dataset_metadata, \
         val_dataset_dicts
 
-def setup_config(config, output_dir):
+def setup_config(config, output_dir, model_name):
     cfg = get_cfg()
     #Load model parameters
     cfg.merge_from_file(config)
@@ -84,7 +84,7 @@ def setup_config(config, output_dir):
     cfg.DATASETS.TRAIN = ("train_detector",)
     cfg.DATASETS.TEST = ("val_detector",)
     #Create output directory to store results
-    cfg.OUTPUT_DIR = output_dir
+    cfg.OUTPUT_DIR = os.path.join(output_dir, model_name)
     os.makedirs(cfg.OUTPUT_DIR, exist_ok = True)
     #Set config device
     if torch.cuda.is_available():
