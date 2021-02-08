@@ -19,6 +19,7 @@ from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
 
 def main_eda(files, outdir, **kwargs):
+    os.makedirs(outdir, exist_ok = True)
     register_coco_instances("train_lane_cone_detector", {}, files[0], files[1])
     train_dataset_metadata = MetadataCatalog.get("train_lane_cone_detector")
     train_dataset_dicts = DatasetCatalog.get("train_lane_cone_detector")
