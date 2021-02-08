@@ -16,7 +16,6 @@ from detectron2.data.datasets import register_coco_instances
 from detectron2.config import get_cfg
 from detectron2.utils.visualizer import ColorMode
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
-%matplotlib inline
 
 
 def main_eda(files, outdir, **kwargs):
