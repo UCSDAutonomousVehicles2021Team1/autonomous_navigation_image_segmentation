@@ -5,13 +5,11 @@ import subprocess
 
 sys.path.insert(0, 'src')
 from etl import move_data
-# from eda import main_eda
-# from utils import convert_notebook
+from eda import main_eda
+from utils import convert_notebook
 from train import train_models
 from evaluate import find_best_model
 from inference import best_inference
-# from tuning import find_metrics
-# from generate import create_launch_files
 
 
 
