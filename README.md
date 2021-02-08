@@ -14,21 +14,29 @@ It allows for the use of training multiple models (under the Detectron2 network)
 
 ## Targets
 
-1. data
+1. data:
+
   This target allows you to move data into the main repository. For formatting instructions go to test/testdata and see how the data inputted should be arranged
-2. eda
+2. eda:
+
   This target runs an eda on the data. Currently it's setup to run on test data
-3. train
+3. train:
+
   This target trains all the models provided in the configs/model_configs folder. The train and validation metrics are outputted into a folder of your choice. These metrics have been cleaned up and dumped in .json format for easy loading
-4. evaluate
+4. evaluate:
+
   This target evaluates all the validation metrics based off an order you specify in evaluate-params.json under config. The model that performs best is then returned under a folder of your choice in the form of a .txt
-5. inference
+5. inference:
+
   This target uses the best model found earlier to run an inference on labelled test data. It provides metrics once again as well as a video output of all the predictions made.
-6. test
+6. test:
+
   This target runs all previous targets on test data and is mainly used to ensure the repository is still working as intended as well as give a demo of what the current targets look like
-7. all
+7. all:
+
   This target works similarly to the test data except it runs on the data inputs you specified in data-params.json under config
-8. clean
+8. clean:
+
   This target cleans the repository to bring it back to the original state. WARNING: It will delete model weights as well as the model configuration that performed best so please save results appropriately
 
 Currently we don't support running train, evaluate or inference individually. Please use them all together
