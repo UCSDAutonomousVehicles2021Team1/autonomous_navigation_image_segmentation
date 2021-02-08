@@ -18,7 +18,7 @@ from inference import best_inference
 def main(targets):
 
     data_config = json.load(open('config/data-params.json'))
-    # eda_config = json.load(open('config/eda-params.json'))
+    eda_config = json.load(open('config/eda-params.json'))
     training_config = json.load(open('config/training-params.json'))
     evaluate_config = json.load(open('config/evaluate-params.json'))
     inference_config = json.load(open('config/inference-params.json'))
@@ -30,16 +30,24 @@ def main(targets):
     if 'data' in targets:
         move_data(**data_config)
 
-#     if 'eda' in targets:
-#         main_eda(**eda_config)
-        
-# #         execute notebook / convert to html
-#         convert_notebook(**eda_config)
+    if 'eda' in targets:
+        main_eda(**eda_config)
+#         execute notebook / convert to html
+        convert_notebook(**eda_config)
 
+    if 'train' in targets:
+        model_names = train_models(**training_config)
+
+    if 'evaluate' in targets:
+        best_model_name = find_best_model(model_names, **evaluate_config)
+
+    if 'inference' in targets:
+        best_inference(best_model_name, **inference_config)
+ 
     if 'test' in targets:
         move_data(**test_config)
-#         main_eda(**eda_config)
-#         convert_notebook(**eda_config)
+        main_eda(**eda_config)
+        convert_notebook(**eda_config)
         model_names = train_models(**training_config)
         best_model_name = find_best_model(model_names, **evaluate_config)
         print("Found best model: {}".format(best_model_name))
@@ -49,12 +57,16 @@ def main(targets):
         for file in os.listdir():
             if not file in repo_files:
                 subprocess.call(["rm", "-r", "-f", file])
-#     if 'all' in targets:
-#         move_data(**data_config)
-#         main_eda(**eda_config)
-#         convert_notebook(**eda_config)
-#         find_metrics(**tuning_config)
-#         create_launch_files(**generate_config)
+
+    if 'all' in targets:
+        move_data(**data_config)
+        main_eda(**eda_config)
+        main_eda(**eda_config)
+        convert_notebook(**eda_config)
+        model_names = train_models(**training_config)
+        best_model_name = find_best_model(model_names, **evaluate_config)
+        print("Found best model: {}".format(best_model_name))
+        best_inference(best_model_name, **inference_config)
 
 if __name__ == '__main__':
 

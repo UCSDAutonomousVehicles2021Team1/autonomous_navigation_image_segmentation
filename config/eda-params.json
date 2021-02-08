@@ -1,0 +1,6 @@
+{
+    "files": ["test/testdata/train/train.json", "test/testdata/train"],
+    "outdir": "data/report/",
+    "report_in_path": "notebooks/report.ipynb",
+    "report_out_path": "results/report.html"
+}
