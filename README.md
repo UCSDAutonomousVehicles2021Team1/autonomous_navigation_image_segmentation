@@ -28,6 +28,8 @@ It allows for the use of training multiple models (under the Detectron2 network)
   This target runs all previous targets on test data and is mainly used to ensure the repository is still working as intended as well as give a demo of what the current targets look like
 7. all
   This target works similarly to the test data except it runs on the data inputs you specified in data-params.json under config
+8. clean
+  This target cleans the repository to bring it back to the original state. WARNING: It will delete model weights as well as the model configuration that performed best so please save results appropriately
 
 Currently we don't support running train, evaluate or inference individually. Please use them all together
 
