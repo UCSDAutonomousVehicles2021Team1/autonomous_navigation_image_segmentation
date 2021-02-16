@@ -82,3 +82,5 @@ Example call: ```python run.py data eda train evaluate inference```
 -This work heavily relies on FAIR's Detectron2 Network: https://github.com/facebookresearch/detectron2
 
 -The test data is labelled using MakeSense in the COCO JSON format: https://github.com/SkalskiP/make-sense 
+
+- utils.py and creation of notebook for EDA taken from Aaron Fraenkel: https://github.com/afraenkel
